@@ -1,0 +1,7 @@
+services:
+   app:
+    image: devops-learning:latest
+    container_name: devops-app
+
+    ports:
+    - "3000:3000"
