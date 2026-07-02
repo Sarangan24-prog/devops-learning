@@ -1,27 +1,27 @@
-name: Node CI
+name: Docker CI
 
 on:
   push:
     branches:
       - main
+      
 
 jobs:
-  build:
+   docker-build:
 
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - name: Build Docker Image
+        run: docker build -t devops-learning .
+         
 
-      - name: Install Packages
-        run: npm install
+      - name: Run Docker Container
+        run: docker run -d -p 3000:3000 devops-learning
 
-      - name: Start Application
+      - name: Check running containers
         run: node index.js &
